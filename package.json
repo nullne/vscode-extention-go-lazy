@@ -3,7 +3,7 @@
   "publisher": "nullne",
   "displayName": "go-lazy",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -11,7 +11,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:go-lazy.generate-postgres"
+    "onCommand:go-lazy.generate-postgres",
+    "onCommand:go-lazy.generate-rest"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -19,6 +20,10 @@
       {
         "command": "go-lazy.generate-postgres",
         "title": "Lazy: Generate DB Implementation for Postgres"
+      },
+      {
+        "command": "go-lazy.generate-rest",
+        "title": "Lazy: Generate REST Implementation"
       }
     ]
   },

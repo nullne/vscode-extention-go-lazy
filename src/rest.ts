@@ -17,7 +17,7 @@ interface GoTagsConfig {
 	template: string;
 }
 
-export function generatePostgres(commandArgs: GoTagsConfig) {
+export function generateRest(commandArgs: GoTagsConfig) {
 	const args = getCommonArgs();
 	run(args);
 }
@@ -32,7 +32,7 @@ function getCommonArgs(): string[] {
 		vscode.window.showInformationMessage('Current file is not a Go file.');
 		return [];
 	}
-	const args = ['-file', editor.document.fileName, '-type', 'pg'];
+	const args = ['-file', editor.document.fileName, '-type', 'rest'];
 	if (
 		editor.selection.start.line === editor.selection.end.line
 	) {
@@ -62,7 +62,7 @@ function run(args: string[]) {
         vscode.window.showErrorMessage('only can run in domain directory');
         return;
     }
-    const outputFile = dbFilePath(editor.document.fileName);
+    const outputFile = outputFilePath(editor.document.fileName);
 
     if ( !unCommitedChanges(path.dirname(outputFile)) ){
         vscode.window.showErrorMessage('Make sure all changes are commited before generating code');
@@ -99,9 +99,9 @@ function run(args: string[]) {
 	vscode.window.showInformationMessage('db implementation generated at', outputFile);
 }
 
-function dbFilePath(cur: string): string {
+function outputFilePath(cur: string): string {
     const filename = path.basename(cur);
-    const p = path.dirname(cur).replace('domain', 'store/db');
+    const p = path.dirname(cur).replace('domain', 'rest');
     return path.join(p, filename);
 }
 

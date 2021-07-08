@@ -7,6 +7,7 @@ import vscode = require('vscode');
 import {getFileArchive, byteOffsetAt} from './util';
 import fs = require('fs');
 import { generatePostgres } from './postgres';
+import { generateRest } from './rest';
 
 
 
@@ -32,6 +33,12 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('go-lazy.generate-postgres', (args) => {
 			generatePostgres(args);
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('go-lazy.generate-rest', (args) => {
+			generateRest(args);
 		})
 	);
 
